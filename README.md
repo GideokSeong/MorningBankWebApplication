@@ -8,10 +8,10 @@
 [image3]: 11.PNG 
 [image4]: 13.PNG 
 [image5]: 14.PNG 
-[image6]: 15.png
-[image7]: 16.png
-[image8]: 17.png
-[image9]: 18.png
+[image6]: 15.PNG
+[image7]: 16.PNG
+[image8]: 17.PNG
+[image9]: 18.PNG
 
 ### 1. Major components ( DataLayer, BusinessLayer, and Cache )
 This application uses MVC model which is based on C# in Jsp.net in visual studio 2017.
@@ -43,3 +43,8 @@ Following images are showing how each function work as a visualization on web br
 ![alt text][image7]
 ![alt text][image8]
 ![alt text][image9]
+
+### 3. Conclusion
+Through this project, I learned about MVC model and how business model and data layer communicate.
+Using repository, I can access database directly by making queries. Also, I learned about cache concept which makes users use high 
+efficiency of using data. Finally, I utlized cookie concept for the purpose of security. In conclusion, by implementing many functions, I got to learn many concepts. 
