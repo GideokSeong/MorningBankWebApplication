@@ -3,12 +3,15 @@
 -----------------------------
 [//]: # (Image References)
 
-[image1]: ./Output/1.PNG "Visualization"
-[image2]: ./Output/2.PNG "New Images"
-[image3]: ./Output/3.PNG "Classification for new images"
-[image4]: ./Output/4.PNG "Accuracy for new images"
-[image5]: ./Output/5.PNG "Top five classification for new images"
-[image6]: ./Output/samples.png "All labels"
+[image1]: 8.PNG 
+[image2]: 10.PNG 
+[image3]: 11.PNG 
+[image4]: 13.PNG 
+[image5]: 14.PNG 
+[image6]: 15.png
+[image7]: 16.png
+[image8]: 17.png
+[image9]: 18.png
 
 ### 1. Major components ( DataLayer, BusinessLayer, and Cache )
 This application uses MVC model which is based on C# in Jsp.net in visual studio 2017.
@@ -31,7 +34,11 @@ are matched, then again it is decrypted. By using cookie function, this applicat
 For paying phone bill, when user tries to pay the phone bill, the amount of money user used are taken out from the checking account.
 Following images are showing how each function work as a visualization on web browser.
 ![alt text][image1]
-![alt text][image1]
-![alt text][image1]
-![alt text][image1]
-![alt text][image1]
+![alt text][image2]
+![alt text][image3]
+![alt text][image4]
+![alt text][image5]
+![alt text][image6]
+![alt text][image7]
+![alt text][image8]
+![alt text][image9]
