@@ -35,7 +35,7 @@ For paying phone bill, when user tries to pay the phone bill, the amount of mone
 Following images are showing how each function work as a visualization on web browser.
 ![alt text][image1]
 ![alt text][image2]
-![alt text][image3]
+![alt text][image3] 
 ![alt text][image4]
 ![alt text][image5]
 ![alt text][image6]
