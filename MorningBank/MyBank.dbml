@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MyBank" Class="MyBankDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-IIKH6KF\SQLEXPRESS;Initial Catalog=MyBank;Integrated Security=True" SettingsObjectName="MorningBank.Properties.Settings" SettingsPropertyName="MyBankConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.SavingAccounts" Member="SavingAccounts">
+    <Type Name="SavingAccount">
+      <Column Name="Username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SavingAccountNumber" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Balance" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="SavingAccount_TransactionHistory" Member="TransactionHistories" ThisKey="SavingAccountNumber" OtherKey="SavingAccountNumber" Type="TransactionHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CheckingAccounts" Member="CheckingAccounts">
+    <Type Name="CheckingAccount">
+      <Column Name="Username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CheckingAccountNumber" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Balance" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="CheckingAccount_TransactionHistory" Member="TransactionHistories" ThisKey="CheckingAccountNumber" OtherKey="CheckingAccountNumber" Type="TransactionHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TransactionTypes" Member="TransactionTypes">
+    <Type Name="TransactionType">
+      <Column Name="TransactionTypeId" Type="System.Int64" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TransactionTypeName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="TransactionType_TransactionHistory" Member="TransactionHistories" ThisKey="TransactionTypeId" OtherKey="TransactionTypeId" Type="TransactionHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TransactionHistories" Member="TransactionHistories">
+    <Type Name="TransactionHistory">
+      <Column Name="TransactionId" AutoSync="Never" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TransactionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CheckingAccountNumber" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="SavingAccountNumber" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Transactionfee" Member="TransactionFee" Storage="_Transactionfee" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionTypeId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="CheckingAccount_TransactionHistory" Member="CheckingAccount" ThisKey="CheckingAccountNumber" OtherKey="CheckingAccountNumber" Type="CheckingAccount" IsForeignKey="true" />
+      <Association Name="SavingAccount_TransactionHistory" Member="SavingAccount" ThisKey="SavingAccountNumber" OtherKey="SavingAccountNumber" Type="SavingAccount" IsForeignKey="true" />
+      <Association Name="TransactionType_TransactionHistory" Member="TransactionType" ThisKey="TransactionTypeId" OtherKey="TransactionTypeId" Type="TransactionType" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

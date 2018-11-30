@@ -1,0 +1,43 @@
+﻿@model MorningBank.Models.ViewModels.LoanStatusModel
+
+@{
+    ViewBag.Title = "LoanStatus";
+}
+
+<h2>LoanStatus</h2>
+
+<div>
+    <h4>LoanStatusModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+    @if (ViewBag.Success == true)
+    {
+        <div class="col-md-offset-2 col-md-10 text-success">
+            @ViewBag.Message
+        </div>
+    }
+    else
+    {
+        <div class="col-md-offset-2 col-md-10 text-danger">
+            @ViewBag.Message
+        </div>
+    }
+</div>
+
