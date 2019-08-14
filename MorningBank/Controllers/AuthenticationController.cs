@@ -61,7 +61,7 @@ namespace MorningBank.Controllers
                     // causes antiforgery token exception                     
                     return Redirect(redirectURL);
                 }
-                ViewBag.Message = "Inalid login..";
+                ViewBag.Message = "Invalid login..";
             }
             return View(lm);
         }

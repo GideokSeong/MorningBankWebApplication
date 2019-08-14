@@ -251,8 +251,8 @@ namespace MorningBank.DataLayer
                 int rows = UpdateLoanApprovalStatusTR(checkingAccountNum, Username, conn, sqtr, true);
                 if (rows == 0)
                     throw new Exception("Problem in updating loan status..");
-
-                rows = AddToTransactionHistoryTR(checkingAccountNum, savingAccountNum, amount, 100, transactionFee, conn, sqtr, true);
+                string TransType = "Loan Approval";
+                rows = AddToTransactionHistoryTR(checkingAccountNum, savingAccountNum, amount, TransType, 100, transactionFee, conn, sqtr, true);
 
                 if (rows == 0)
                     throw new Exception("Problem in updating to Transaction history for the loan status..");
@@ -325,8 +325,8 @@ namespace MorningBank.DataLayer
 
                 if (rows == 0)
                     throw new Exception("Problem in appyling the loan..");
-
-                rows = AddToTransactionHistoryTR(checkingAccountNum, savingAccountNum, amount, 103, transactionFee, conn, sqtr, true);
+                string TransType = "Apply Loan";
+                rows = AddToTransactionHistoryTR(checkingAccountNum, savingAccountNum, amount, TransType, 103, transactionFee, conn, sqtr, true);
 
                 if (rows == 0)
                     throw new Exception("Problem in appyling the loan..");
@@ -377,8 +377,8 @@ namespace MorningBank.DataLayer
 
                 if (rows == 0)
                     throw new Exception("Problem in transferring to Phone Bill Payment ..");
-
-                rows = AddToTransactionHistoryTR(checkingAccountNum, savingAccountNum, amount, 102, transactionFee, conn, sqtr, true);
+                string TransType = "Phone Bill Payment";
+                rows = AddToTransactionHistoryTR(checkingAccountNum, savingAccountNum, amount, TransType, 102, transactionFee, conn, sqtr, true);
 
                 if (rows == 0)
                     throw new Exception("Problem in transferring to Phone Bill Payment..");
@@ -429,8 +429,8 @@ namespace MorningBank.DataLayer
                 rows = UpdateSavingBalanceTR(savingAccountNum, amount, conn, sqtr, true);
                 if (rows == 0)
                     throw new Exception("Problem in transferring to Saving Account..");
-
-                rows = AddToTransactionHistoryTR(checkingAccountNum, savingAccountNum, amount, 100, transactionFee, conn, sqtr, true);
+                string TransType = "CheckingToSaving";
+                rows = AddToTransactionHistoryTR(checkingAccountNum, savingAccountNum, amount, TransType, 100, transactionFee, conn, sqtr, true);
 
                 if (rows == 0)
                     throw new Exception("Problem in transferring to Saving Account..");
@@ -481,8 +481,8 @@ namespace MorningBank.DataLayer
                 rows = UpdateCheckingBalanceTR(checkingAccountNum, amount, conn, sqtr, true);
                 if (rows == 0)
                     throw new Exception("Problem in transferring to Saving Account..");
-
-                rows = AddToTransactionHistoryTR(checkingAccountNum, savingAccountNum, amount, 101, transactionFee, conn, sqtr, true);
+                string transtype = "SavingToChecking";
+                rows = AddToTransactionHistoryTR(checkingAccountNum, savingAccountNum, amount, transtype, 101, transactionFee, conn, sqtr, true);
 
                 if (rows == 0)
                     throw new Exception("Problem in transferring to Saving Account..");
@@ -652,16 +652,16 @@ namespace MorningBank.DataLayer
             }
             return objBal;
         }
-
-        private int AddToTransactionHistoryTR(long checkingAccountNum, long savingAccountNum, decimal amount, int transTypeId, decimal transFee, DbConnection conn, DbTransaction sqtr, bool doTransaction)
+        
+        private int AddToTransactionHistoryTR(long checkingAccountNum, long savingAccountNum, decimal amount, string transtype, int transTypeId, decimal transFee, DbConnection conn, DbTransaction sqtr, bool doTransaction)
         {
             int rows = 0;
 
             try
             {
                 string sql1 = "insert into TransactionHistories(CheckingAccountNumber,SavingAccountNumber,"
-                    + "Amount,TransactionFee,TransactionTypeId) values (@CheckingAccountNumber,@SavingAccountNumber,"
-                    + "@Amount,@TransactionFee,@TransactionTypeId)";
+                    + "Amount,TransactionFee,TransactionTypeId,TransactionType) values (@CheckingAccountNumber,@SavingAccountNumber,"
+                    + "@Amount,@TransactionFee,@TransactionTypeId,@TransactionType)";
                 List<DbParameter> ParamList = new List<DbParameter>();
                 SqlParameter p1 = new SqlParameter("@CheckingAccountNumber", SqlDbType.BigInt);
                 p1.Value = checkingAccountNum;
@@ -675,9 +675,12 @@ namespace MorningBank.DataLayer
                 SqlParameter p4 = new SqlParameter("@TransactionFee", SqlDbType.Decimal);
                 p4.Value = transFee;
                 ParamList.Add(p4);
-                SqlParameter p5 = new SqlParameter("@TransactionTypeId", SqlDbType.Int);
-                p5.Value = transTypeId;
+                SqlParameter p5 = new SqlParameter("@TransactionType", SqlDbType.VarChar);
+                p5.Value = transtype;
                 ParamList.Add(p5);
+                SqlParameter p6 = new SqlParameter("@TransactionTypeId", SqlDbType.Int);
+                p6.Value = transTypeId;
+                ParamList.Add(p6);
                 rows = _idac.InsertUpdateDelete(sql1, ParamList, conn, sqtr, doTransaction);
                 // part of transaction             
             }

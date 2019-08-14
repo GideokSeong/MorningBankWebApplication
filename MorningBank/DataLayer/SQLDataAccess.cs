@@ -97,6 +97,7 @@ namespace MorningBank.DataLayer
                     foreach (SqlParameter p in PList) cmd.Parameters.Add(p);
                 }
                 rows = cmd.ExecuteNonQuery();
+                //rows = 1;
             }
             catch (Exception)
             {
